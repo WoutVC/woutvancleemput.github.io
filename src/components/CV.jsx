@@ -4,6 +4,7 @@ import cv from "./../images/CV.png";
 
 const CV = () => {
   const { t } = useTranslation();
+  
 
   return (
     <div className="mx-auto pt-9 pb-4 mb-2 p-5">
