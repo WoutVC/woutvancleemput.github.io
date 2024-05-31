@@ -1,0 +1,58 @@
+image: node:lts
+
+definitions:
+  steps:
+    step: &deploy
+      name: Deploy
+      caches:
+        - node
+      script:
+        - npm run build:$BITBUCKET_DEPLOYMENT_ENVIRONMENT
+        - pipe: atlassian/aws-s3-deploy:1.1.0
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            S3_BUCKET: "stg-training-budget-manager-${BITBUCKET_DEPLOYMENT_ENVIRONMENT}"
+            LOCAL_PATH: "dist"
+        - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            DISTRIBUTION_ID: "EO3CE42KA9LZQ"
+
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Build and Test
+            caches:
+              - node
+            script:
+              - npm install
+              - npm test
+        - step:
+            name: Lint the node package
+            script:
+              - npx eslint src
+            caches:
+              - node
+  branches:
+    main:
+      - step:
+          name: Test
+          caches:
+            - node
+          script:
+            - npm install
+            - npm test
+      - step:
+          <<: *deploy
+          name: Deploy to dev
+          deployment: dev
+      - step:
+          <<: *deploy
+          name: Deploy to prd
+          deployment: prd
+          trigger: manual

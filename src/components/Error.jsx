@@ -1,0 +1,25 @@
+export default function Error({ error }) {
+  if (error) {
+    return (
+      <div
+        className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full flex flex-col my-2"
+        role="alert"
+      >
+        <strong className="font-bold">Error</strong>
+        <span className="block sm:inline">
+          {error.message || JSON.stringify(error)}
+        </span>
+        <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+          <svg
+            className="fill-current h-6 w-6 text-red-500"
+            role="button"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          ></svg>
+        </span>
+      </div>
+    );
+  }
+
+  return null;
+}
