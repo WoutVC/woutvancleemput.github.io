@@ -88,6 +88,7 @@ const HomePage = () => {
               <p className="text-sm">February 2024 - Present</p>
             </div>
           </section>
+          
 
           <section>
             <h2 className="text-2xl font-semibold text-teal-600 border-b border-teal-600 mb-4">
