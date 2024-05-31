@@ -50,6 +50,9 @@ const Navbar = () => {
             <Link to="/" className={getLinkClassName("/")}>
               {t("portfolio")}
             </Link>
+            <Link to="/cv" className={getLinkClassName("/cv")}>
+              CV
+            </Link>
             <button
               onClick={() =>
                 i18n.changeLanguage(i18n.language === "nl" ? "en" : "nl")
@@ -71,6 +74,9 @@ const Navbar = () => {
           <Link to="/" className="color-[#FFFFFF] nav-link">
             {t("portfolio")}
           </Link>
+          <Link to="/cv" className={getLinkClassName("/cv")}>
+              CV
+            </Link>
           <button
             onClick={() =>
               i18n.changeLanguage(i18n.language === "nl" ? "en" : "nl")

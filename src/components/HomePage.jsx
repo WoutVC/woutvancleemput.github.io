@@ -1,6 +1,5 @@
 import "./../App.css";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import profile_picture from "./../images/ProfilePicture.png";
 
 const HomePage = () => {
@@ -47,6 +46,14 @@ const HomePage = () => {
               <li>JavaScript</li>
               <li>React.js</li>
               <li>C#</li>
+            </ul>
+          </section>
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-teal-600 border-b border-teal-600 mb-2">
+              Hobby
+            </h2>
+            <ul className="list-disc pl-5">
+              <li>Gaming</li>
             </ul>
           </section>
         </div>

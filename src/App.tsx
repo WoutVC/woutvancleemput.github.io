@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import "./i18n";
 import Loader from "./components/Loader";
 import HomePage from "./components/HomePage";
+import CV from "./components/CV";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route index element={<HomePage />} />
+        <Route path="/cv" element={<CV />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </QueryClientProvider>
